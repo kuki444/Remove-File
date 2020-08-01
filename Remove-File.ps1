@@ -4,14 +4,10 @@
 #   -r: Recursive Search Directory
 #   -v: View Remove File LIst
 #   -f: Force Remove File Messege
-#   -nofilter: No fileter And File Only Remove
-#   -SimpleMatch: -filter Designation Object Text Find
-#   -filter: Find File filter (Expression)
 #   -include: Include File Name
 #   -exclude: Exclude File Name
 #   -days: days Remove File 
 #   -$path: Find Path (defult:.\)
-#   -Encoding: Japanese Os is JIS
 # Param
 param([switch] $r, [switch] $f, [switch] $v, $include, $exclude, $days, $path)
 # Param Include Setting .\ Off
@@ -38,11 +34,11 @@ if ($null -eq $path)
 # Param Recursion Setting And Find File
 if ($r -eq $false)
 {
-    $result = Get-ChildItem -Path $path -Include $include -Exclude $exclude | Where-Object{$_.PSIsContainer -eq $false } | Where-Object{((Get-Date).Subtract($_.LastWriteTime)).Days -ge $days}
+    $result = Get-ChildItem -Path $path -Include $include -Exclude $exclude -File | Where-Object{$_.PSIsContainer -eq $false } | Where-Object{((Get-Date).Subtract($_.LastWriteTime)).Days -ge $days}
 }
 elseif ($r -eq $true)
 {
-    $result = Get-ChildItem -Path $path -Include $include -Exclude $exclude -Recurse -Force | Where-Object{$_.PSIsContainer -eq $false } | Where-Object{((Get-Date).Subtract($_.LastWriteTime)).Days -ge $days}
+    $result = Get-ChildItem -Path $path -Include $include -Exclude $exclude -Recurse -Force -File | Where-Object{$_.PSIsContainer -eq $false } | Where-Object{((Get-Date).Subtract($_.LastWriteTime)).Days -ge $days}
 }
 # Param View RemoveFile List
 if ($v -eq $true)
