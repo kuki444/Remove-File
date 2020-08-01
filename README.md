@@ -2,7 +2,7 @@
 
 
 Unit test
-  Pester
+  Pester 5
 
 Ext :
 Invoke-Pester
